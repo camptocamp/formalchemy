@@ -31,6 +31,8 @@ from formalchemy.i18n import get_translator
 from formalchemy.i18n import _
 from formalchemy.helpers import html_escape
 
+from webhelpers2.html.tags import Option
+
 __all__ = ['Field', 'FieldRenderer',
            'TextFieldRenderer', 'TextAreaFieldRenderer',
            'PasswordFieldRenderer', 'HiddenFieldRenderer',
@@ -832,7 +834,7 @@ class SelectFieldRenderer(FieldRenderer):
             L = list(options)
         if len(L) > 0:
             if len(L[0]) == 2:
-                L = [(k, self.stringify_value(v)) for k, v in L]
+                L = [Option(k, self.stringify_value(v)) for k, v in L]
             else:
                 L = [_stringify(k) for k in L]
         return h.select(self.name, self.value, L, **kwargs)
